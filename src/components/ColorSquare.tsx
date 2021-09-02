@@ -1,19 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const ColorSquare = () => {
+interface IProps{
+    color:string;
+}
+const ColorSquare = ({color}:IProps) => {
     return (
-        <Square>
-            a color square
-        </Square>
+        <Square color={color}>{color}</Square>
     )
 }
 
 export default ColorSquare
 
 const Square=styled.div`
-    width:100px;
-    height:100px;
-    border:1px solid white;
+    width:150px;
+    height:150px;
+    border:1px solid black;
     border-radius: .5rem;
+    color:#000000;
+    background: rgb(${props=>(props.color)});
 `
