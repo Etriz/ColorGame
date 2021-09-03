@@ -10,28 +10,27 @@ interface IProps {
 }
 
 const AllSquares = ({generateColors,setGuess}:IProps) => {
-  const[color01,setColor01]=useState(generateColors())
-  const[color02,setColor02]=useState(generateColors())
-  const[color03,setColor03]=useState(generateColors())
+  const [colors,setColors]=useState([generateColors(),generateColors(),generateColors()])
 
-  const arr=[color01,color02,color03]
+  const getNewColors=()=>{
+    setColors([generateColors(),generateColors(),generateColors()])
+  }
 
   useEffect(() => {
-    console.log('arr',arr);
-    
-    const random=Math.floor(Math.random()*arr.length)
-    const guessnum=arr[random]
-    console.log(guessnum);
-    
-    setGuess(guessnum)
-  }, [])
-
+    const random=Math.floor(Math.random()*colors.length)
+    const guessNum=colors[random]    
+    setGuess(guessNum)
+  }, [colors,setGuess])
+  
   return (
+    <>
     <Container>
-      <ColorSquare color={color01} />
-      <ColorSquare color={color02} />
-      <ColorSquare color={color03} />
+      <ColorSquare color={colors[0]} />
+      <ColorSquare color={colors[1]} />
+      <ColorSquare color={colors[2]} />
     </Container>
+    <Button onClick={()=>getNewColors()}>New Colors</Button>
+    </>
   );
 };
 
@@ -44,3 +43,12 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
 `;
+
+const Button = styled.button`
+  outline:none;
+  border:none;
+  border-radius: .5rem;
+  padding:.5rem 1rem;
+  margin:1rem 0;
+  font-size: 1rem;
+`
