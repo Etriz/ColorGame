@@ -22,7 +22,7 @@ function App() {
       <header className="App-header">
 
         <ColorGuess guess={guess} />
-        <AllSquares generateColors={generateColors} setGuess={setGuess}/>
+        <AllSquares generateColors={generateColors} guess={guess} setGuess={setGuess}/>
       </header>
     </div>
   );

@@ -5,11 +5,12 @@ import ColorSquare from 'components/ColorSquare';
 
 interface IProps {
   generateColors:Function;
+  guess:string;
   setGuess:Function;
   // any other props that come into the component
 }
 
-const AllSquares = ({generateColors,setGuess}:IProps) => {
+const AllSquares = ({generateColors,guess,setGuess}:IProps) => {
   const [colors,setColors]=useState([generateColors(),generateColors(),generateColors()])
 
   const getNewColors=()=>{
@@ -25,9 +26,10 @@ const AllSquares = ({generateColors,setGuess}:IProps) => {
   return (
     <>
     <Container>
-      <ColorSquare color={colors[0]} />
-      <ColorSquare color={colors[1]} />
-      <ColorSquare color={colors[2]} />
+      {colors.map(squareColor=>{
+        return <ColorSquare color={squareColor} key={squareColor} correct={squareColor===guess} />
+        })
+      }
     </Container>
     <Button onClick={()=>getNewColors()}>New Colors</Button>
     </>
